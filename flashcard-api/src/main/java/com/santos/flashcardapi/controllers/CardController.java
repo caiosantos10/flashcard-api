@@ -1,28 +1,27 @@
 package com.santos.flashcardapi.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.santos.flashcardapi.domain.Card;
+import com.santos.flashcardapi.services.CardService;
 
 @RestController
+@RequestMapping("/cards")
 public class CardController {
+	@Autowired
+	private CardService service;
 	
-	@GetMapping("cards")
-	public List<Card> getCards() {
-		Card card1 = new Card("Test", "Teste");
-		Card card2 = new Card("Good", "Bom");
-		Card card3 = new Card("Bla bla bla", "Teste bla bla bla");
-		
-		List<Card> list = new ArrayList<>();
-		list.add(card1);
-		list.add(card2);
-		list.add(card3);
-		
-		return list;
+	@GetMapping(value="/{id}")
+	public ResponseEntity<?> findById(@PathVariable Integer id) {
+		System.out.println(id);
+		Card obj = service.findById(id);
+		return ResponseEntity.ok().body(obj);
 	}
-
+	
+	
 }
