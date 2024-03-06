@@ -1,6 +1,6 @@
 package com.santos.flashcardapi.services;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ public class CardService {
 	@Autowired
 	private CardRepository repo;
 	
-	public Card findById(Integer id){
-		Optional<Card> obj = repo.findById(id);
-		return obj.orElse(null);
+	public List<Card> findAll(){
+		List<Card> obj = repo.findAll();
+		return obj;
 	}
 }
